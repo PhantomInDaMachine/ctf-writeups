@@ -1,4 +1,4 @@
-baseURL = "/"
+baseURL = "https://ghostintheshell.github.io/"
 languageCode = "en-us"
 theme = "poison"
 pagination.pagerSize = 10
@@ -8,10 +8,10 @@ pluralizelisttitles = false   # removes the automatically appended "s" on sideba
 # disqusShortname = "yourDisqusShortname"
 
 [params]
-    brand = "Hammer"                      # name of your site - appears in the sidebar
+    brand = "A CTF Blog"                      # name of your site - appears in the sidebar
     # remote_brand_image = 'https://github.com/USERNAME.png' # path to a remote file
     # brand_image = "/images/test.jpg"    # path to the image shown in the sidebar
-    description = "CTFs from tryhackme.com" # Used as default meta description if not specified in front matter
+    description = "Blogging about CTFs" # Used as default meta description if not specified in front matter
     dark_mode = true                      # optional - defaults to false
     # favicon = "favicon.png"             # path to favicon (defaults to favicon.png)
 
@@ -26,6 +26,8 @@ pluralizelisttitles = false   # removes the automatically appended "s" on sideba
     menu = [
         {Name = "About", URL = "/about/", HasChildren = false},
         {Name = "Posts", URL = "/posts/", Pre = "Recent", HasChildren = true, Limit = 5},
+        {Name = "try-hack-me", URL = "/try-hack-me/", Pre = "Recent", HasChildren = true, Limit = 5},
+
     ]
 
     # Links to your socials.  Comment or delete any you don't need/use. 
