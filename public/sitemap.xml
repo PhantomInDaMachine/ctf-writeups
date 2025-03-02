@@ -2,40 +2,40 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>//localhost:1313/</loc>
+    <loc>http://localhost:1313/</loc>
   </url><url>
-    <loc>//localhost:1313/posts/hammer/hammer/</loc>
+    <loc>http://localhost:1313/try-hack-me/medium/hammer/</loc>
   </url><url>
-    <loc>//localhost:1313/tags/bash/</loc>
+    <loc>http://localhost:1313/tags/bash/</loc>
   </url><url>
-    <loc>//localhost:1313/tags/burp_suite/</loc>
+    <loc>http://localhost:1313/tags/burp_suite/</loc>
   </url><url>
-    <loc>//localhost:1313/tags/curl/</loc>
+    <loc>http://localhost:1313/tags/curl/</loc>
   </url><url>
-    <loc>//localhost:1313/tags/ffuf/</loc>
+    <loc>http://localhost:1313/tags/ffuf/</loc>
   </url><url>
-    <loc>//localhost:1313/tags/json_web_token/</loc>
+    <loc>http://localhost:1313/tags/json_web_token/</loc>
   </url><url>
-    <loc>//localhost:1313/tags/mfa/</loc>
+    <loc>http://localhost:1313/tags/mfa/</loc>
   </url><url>
-    <loc>//localhost:1313/tags/netcat/</loc>
+    <loc>http://localhost:1313/tags/netcat/</loc>
   </url><url>
-    <loc>//localhost:1313/tags/nmap/</loc>
+    <loc>http://localhost:1313/tags/nmap/</loc>
   </url><url>
-    <loc>//localhost:1313/tags/oauth/</loc>
+    <loc>http://localhost:1313/tags/oauth/</loc>
   </url><url>
-    <loc>//localhost:1313/tags/pentesting/</loc>
+    <loc>http://localhost:1313/tags/pentesting/</loc>
   </url><url>
-    <loc>//localhost:1313/posts/</loc>
+    <loc>http://localhost:1313/series/</loc>
   </url><url>
-    <loc>//localhost:1313/series/</loc>
+    <loc>http://localhost:1313/tags/</loc>
   </url><url>
-    <loc>//localhost:1313/tags/</loc>
+    <loc>http://localhost:1313/tags/thm/</loc>
   </url><url>
-    <loc>//localhost:1313/tags/thm/</loc>
+    <loc>http://localhost:1313/try-hack-me/</loc>
   </url><url>
-    <loc>//localhost:1313/tags/wget/</loc>
+    <loc>http://localhost:1313/tags/wget/</loc>
   </url><url>
-    <loc>//localhost:1313/tags/writeup/</loc>
+    <loc>http://localhost:1313/tags/writeup/</loc>
   </url>
 </urlset>
