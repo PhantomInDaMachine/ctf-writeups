@@ -77,7 +77,7 @@ Port 22 is open but no web-server.
 nmap -sV -O -p 0-2000 hammer.thm -oN nMap/hammer_p0-2000_sV_O.txt
 ```
 
-![Image](/images/Hammer-2.png)
+![Image](phantomindamachine.github.io/CTF-Blogs/images/Hammer-2.png)
 
 Now we get an Apache server running on port 1337.
 
