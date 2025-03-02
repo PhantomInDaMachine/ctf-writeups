@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title></title>
+    <link>//localhost:1313/</link>
+    <description>Recent content on </description>
+    <generator>Hugo</generator>
+    <language>en-us</language>
+    <atom:link href="//localhost:1313/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title></title>
+      <link>//localhost:1313/posts/hammer/hammer/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/posts/hammer/hammer/</guid>
+      <description>&lt;hr&gt;&#xA;&lt;h1 id=&#34;tryhackme-hammer-ctf-challenge&#34;&gt;TryHackMe: Hammer CTF Challenge&lt;/h1&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Acknowledgment&lt;/strong&gt;&lt;/em&gt;: Shout out to &lt;code&gt;hexguy&lt;/code&gt; whom writeup helped me solve this box. His writeup seems to be down when last I checked.&lt;/p&gt;&#xA;&lt;h2 id=&#34;add-target-ip-to-etchosts-file&#34;&gt;Add target IP to &lt;code&gt;/etc/hosts&lt;/code&gt; file&lt;/h2&gt;&#xA;&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;sudo vim /etc/hosts&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;//localhost:1313/images/Hammer.png&#34; alt=&#34;Image&#34;&gt;&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;h2 id=&#34;1-reconnaissance&#34;&gt;1. Reconnaissance&lt;/h2&gt;&#xA;&lt;p&gt;It says the first flag is behind a dashboard login.&#xA;Navigating to &lt;code&gt;http://hammer.thm/&lt;/code&gt; shows an &lt;code&gt;ERR_CONNECTION_REFUSED&lt;/code&gt;.&#xA;Maybe we have the wrong port.&#xA;Lets start with &lt;code&gt;nmap&lt;/code&gt;.&lt;/p&gt;&#xA;&lt;hr&gt;&#xA;&lt;p&gt;&lt;em&gt;&lt;strong&gt;Note&lt;/strong&gt;&lt;/em&gt;: As a friendly reminder, &lt;code&gt;-sV&lt;/code&gt; excludes port 9100, which is often the default port for printers.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
