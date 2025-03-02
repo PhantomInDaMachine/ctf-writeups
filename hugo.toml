@@ -1,4 +1,4 @@
-baseURL = "/"
+baseURL = "https://phantomindamachine.github.io/CTF-Blogs/"
 languageCode = "en-us"
 theme = "poison"
 pagination.pagerSize = 10
