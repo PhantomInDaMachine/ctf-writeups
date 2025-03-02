@@ -27,7 +27,7 @@ tags:
 sudo vim /etc/hosts
 ```
 
-![Image](/images/Hammer.png)
+![Image](https://phantomindamachine.github.io/CTF-Blogs/images/Hammer.png)
 
 ---
 
@@ -62,7 +62,7 @@ Lets start with `nmap`.
 nmap --top-ports 20 hammer.thm -o nMap/hammer_top20_ports.txt
 ```
 
-![Image](/images/Hammer-1.png)
+![Image](https://phantomindamachine.github.io/CTF-Blogs/images/Hammer-1.png)
 
 Port 22 is open but no web-server. 
 
@@ -77,7 +77,7 @@ Port 22 is open but no web-server.
 nmap -sV -O -p 0-2000 hammer.thm -oN nMap/hammer_p0-2000_sV_O.txt
 ```
 
-![Image](phantomindamachine.github.io/CTF-Blogs/images/Hammer-2.png)
+![Image](https://phantomindamachine.github.io/CTF-Blogs/images/Hammer-2.png)
 
 Now we get an Apache server running on port 1337.
 
@@ -91,7 +91,7 @@ Going a bit deeper on our 2 open ports
 nmap -A -p 22,1337 hammer.thm -oN nMap/hammer_A_p22_1337.txt
 ```
 
-![Image](/images/Hammer-3.png)
+![Image](https://phantomindamachine.github.io/CTF-Blogs/images/Hammer-3.png)
 
 Here we find:
 - PHP is running because the `PHPSESSID` cookie is set.
@@ -184,9 +184,9 @@ done
 - here we get a sharp drop in `Content-Length` on the response
 - from 1754 bytes to 44 bytes after 10 requests
 
-![Image](/images/Hammer-6.png)
+![Image](https://phantomindamachine.github.io/CTF-Blogs/images/Hammer-6.png)
 
-![Image](/images/Hammer-7.png)
+![Image](https://phantomindamachine.github.io/CTF-Blogs/images/Hammer-7.png)
 - Adding verbose to the curl command reveals the issue.
 - we are being throttled
 - other than that nothing else interesting
@@ -194,7 +194,7 @@ done
 ### Checking HTTP Responses
 
 Checking the website source code, we find a Dev Note:
-![Image](/images/Hammer-8.png)
+![Image](https://phantomindamachine.github.io/CTF-Blogs/images/Hammer-8.png)
 - keeping this in the back of mind for now
 
 Time to enumerate the website
@@ -211,7 +211,7 @@ For this we be using `ffuf`
 ffuf -u http://hammer.thm:1337/FUZZ -w /usr/.../directory-list-2.3-medium.txt -e .php -c -ic -t 400
 ```
 
-![Image](/images/Hammer-9.png)
+![Image](https://phantomindamachine.github.io/CTF-Blogs/images/Hammer-9.png)
 
 And now to try scanning `hmr_<DIRECTORY_NAME>` that was found in the source code
 
@@ -220,16 +220,16 @@ And now to try scanning `hmr_<DIRECTORY_NAME>` that was found in the source code
 ffuf -u http://hammer.thm:1337/hmr_FUZZ -w /usr/.../directory-list-2.3-medium.txt -e .php -c -ic -t 400
 ```
 
-![Image](/images/Hammer-10.png)
+![Image](https://phantomindamachine.github.io/CTF-Blogs/images/Hammer-10.png)
 
 Looking through the `/hmr_logs` reveals a user 
 - `tester@hammer.thm`
 
-![Image](/images/Hammer-11.png)
+![Image](https://phantomindamachine.github.io/CTF-Blogs/images/Hammer-11.png)
 
 Trying the user name on `/reset_password.php` to check if responses have changed
 
-![Image](/images/Hammer-12.png)
+![Image](https://phantomindamachine.github.io/CTF-Blogs/images/Hammer-12.png)
 - we get a prompt to enter a recovery code
 - 4-Digit Code
 - timer expires after 3 mins
@@ -237,7 +237,7 @@ Trying the user name on `/reset_password.php` to check if responses have changed
 Using Burp Suite to intercept the request
 - type 4-digit code
 - **intercept** request and send to **repeater**
-![Image](/images/Hammer-14.png)
+![Image](https://phantomindamachine.github.io/CTF-Blogs/images/Hammer-14.png)
 
    - the timeout is handled via JavaScript
    - the timeout can be modified by sending a different value for `s`
@@ -266,9 +266,9 @@ The winner this time was IP-related headers
 Trying `X-Forwarded-For: 1.1.1.1` reset the rate-limit.
 - Changing the IP-Address in the Header gives another 10 request before it kicks in again.
 - In fact, any value, even an improperly formatted IPV4 address also worked.
-![Image](/images/Hammer-15.png)
+![Image](https://phantomindamachine.github.io/CTF-Blogs/images/Hammer-15.png)
 
-![Image](/images/Hammer-17.png)
+![Image](https://phantomindamachine.github.io/CTF-Blogs/images/Hammer-17.png)
 
 #### Brute-Forcing the MFA
 
@@ -298,26 +298,26 @@ ffuf -u http://hammer.thm:1337/reset_password.php -w codes.txt -X "POST" -H "Con
 
 - Replace `<CHANGE_ME>` with the current `PHPSESSID`
 
-![Image](/images/Hammer-18.png)
+![Image](https://phantomindamachine.github.io/CTF-Blogs/images/Hammer-18.png)
 
-![Image](/images/Hammer-20.png)
+![Image](https://phantomindamachine.github.io/CTF-Blogs/images/Hammer-20.png)
 - Notice no MFA Token.
 - Guessing the payload structure would have also bypassed the 4-digit MFA code
 
 Logging in gives us our first flag.
 
-![Image](/images/Hammer-21.png)
+![Image](https://phantomindamachine.github.io/CTF-Blogs/images/Hammer-21.png)
 
 The site is logging us out every 20 seconds.
 
-![Image](/images/Hammer-22.png)
+![Image](https://phantomindamachine.github.io/CTF-Blogs/images/Hammer-22.png)
 - Changing the expiration date to something further in the future will prevent this
-![Image](/images/Hammer-24.png)
+![Image](https://phantomindamachine.github.io/CTF-Blogs/images/Hammer-24.png)
 
 ### Remote Code Execution
 
 In the dashboard we see some sort of system command form field.
-![Image](/images/Hammer-23.png)
+![Image](https://phantomindamachine.github.io/CTF-Blogs/images/Hammer-23.png)
 - most Linux commands are blocked
 - we are logged in with the `user` role
 
@@ -329,16 +329,16 @@ Lets download it using `wget`:
 wget http://hammer.thm:1337/188ade1.key
 ```
 
-![Image](/images/Hammer%201.png)
+![Image](https://phantomindamachine.github.io/CTF-Blogs/images/Hammer%201.png)
 - not much info there
 
 Looking at the http request and response, we notice that we are sending a JWT token in the `Authorization` header.
 
-![Image](/images/Hammer-20%201.png)
+![Image](https://phantomindamachine.github.io/CTF-Blogs/images/Hammer-20%201.png)
 
 Lets copy that and head over to `jwt.io` to get a closer look.
 
-![Image](/images/Hammer-21%201.png)
+![Image](https://phantomindamachine.github.io/CTF-Blogs/images/Hammer-21%201.png)
 
 From the image above we can notice a few things:
 - the JWT token is signed with the `HS256` algorithm
@@ -348,7 +348,7 @@ From the image above we can notice a few things:
 
 Lets start by changing the JWT `kid` to something that does not exist.
 
-![Image](/images/Hammer-22%201.png)
+![Image](https://phantomindamachine.github.io/CTF-Blogs/images/Hammer-22%201.png)
 
 - we get a `Invalid token: Key file not found` error.
 
@@ -367,13 +367,13 @@ How can we use this information:
 
 ---
 
-![Image](/images/Hammer-23%201.png)
+![Image](https://phantomindamachine.github.io/CTF-Blogs/images/Hammer-23%201.png)
 
 - we pointed the JWT `kid` to the file `/var/www/html/188ade1.key`
 - we changed our role from `user` to `admin`
 - we used the contents of `188ade1.key` to sign our JWT token
 
-![Image](/images/Hammer-24%201.png)
+![Image](https://phantomindamachine.github.io/CTF-Blogs/images/Hammer-24%201.png)
 
 With that we can now run Linux commands
 
@@ -381,7 +381,7 @@ With that we can now run Linux commands
 
 For this we will use the website ***revshells.com*** to help craft a payload:
 
-![Image](/images/Hammer-30.png)
+![Image](https://phantomindamachine.github.io/CTF-Blogs/images/Hammer-30.png)
 
 Lets set up our listener with `netcat`
 ```bash
@@ -401,9 +401,9 @@ So we can use the following command via the HTTP POST requests because we can no
 
 ---
 
-![Image](/images/Hammer-27.png)
+![Image](https://phantomindamachine.github.io/CTF-Blogs/images/Hammer-27.png)
 
-![Image](/images/Hammer-29.png)
+![Image](https://phantomindamachine.github.io/CTF-Blogs/images/Hammer-29.png)
 
 As we can see, we get the reverse shell.
 We then navigate to `/home/ubuntu/` and `cat` the file `flag.txt`.
