@@ -1,21 +1,9 @@
----
-creation date: 2025-02-02 01:35
-modification date: Sunday 2nd February 2025 01:35:32
-tags:
-  - pentesting
-  - writeup
-  - THM
-  - nmap
-  - FFuF
-  - bash
-  - curl
-  - wget
-  - burp_suite
-  - json_web_token
-  - MFA
-  - OAuth
-  - netcat
----
++++
+date = '2025-03-03T16:52:42-05:00'
+lastmod = "2025-03-03T16:52:42-05:00"
+draft = false
+title = 'Hammer'
++++
 ---
 # TryHackMe: Hammer CTF Challenge
 
