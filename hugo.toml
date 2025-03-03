@@ -29,7 +29,7 @@ pluralizelisttitles = false   # removes the automatically appended "s" on sideba
     menu = [
         {Name = "About", URL = "/CTF-Blogs/about/", HasChildren = false},
         {Name = "Posts", URL = "/CTF-Blogs/posts/", Pre = "Recent", HasChildren = true, Limit = 5},
-        {Name = "Try Hack Me", URL = "/CTF-Blogs/try-hack-me/", HasChildren = true, Limit = 5},
+        {Name = "Try Hack Me", URL = "https://phantomindamachine.github.io/CTF-Blogs/try-hack-me/", HasChildren = true, Limit = 5},
     ]
 
     # Links to your socials.  Comment or delete any you don't need/use. 
