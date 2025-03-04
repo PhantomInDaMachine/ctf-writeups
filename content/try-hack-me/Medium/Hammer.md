@@ -15,7 +15,7 @@ title = 'Hammer'
 sudo vim /etc/hosts
 ```
 
-![Image](https://phantomindamachine.github.io/CTF-Blogs/images/Hammer.png)
+![Image](https:/phantomindamachine.github.io/CTF-Blogs/images/try-hack-me/medium/hammer/Hammer.png)
 
 ---
 
@@ -50,7 +50,7 @@ Lets start with `nmap`.
 nmap --top-ports 20 hammer.thm -o nMap/hammer_top20_ports.txt
 ```
 
-![Image](https://phantomindamachine.github.io/CTF-Blogs/images/Hammer-1.png)
+![Image](https:/phantomindamachine.github.io/CTF-Blogs/images/try-hack-me/medium/hammer/Hammer-1.png)
 
 Port 22 is open but no web-server. 
 
@@ -65,7 +65,7 @@ Port 22 is open but no web-server.
 nmap -sV -O -p 0-2000 hammer.thm -oN nMap/hammer_p0-2000_sV_O.txt
 ```
 
-![Image](https://phantomindamachine.github.io/CTF-Blogs/images/Hammer-2.png)
+![Image](https:/phantomindamachine.github.io/CTF-Blogs/images/try-hack-me/medium/hammer/Hammer-2.png)
 
 Now we get an Apache server running on port 1337.
 
@@ -79,7 +79,7 @@ Going a bit deeper on our 2 open ports
 nmap -A -p 22,1337 hammer.thm -oN nMap/hammer_A_p22_1337.txt
 ```
 
-![Image](https://phantomindamachine.github.io/CTF-Blogs/images/Hammer-3.png)
+![Image](https:/phantomindamachine.github.io/CTF-Blogs/images/try-hack-me/medium/hammer/Hammer-3.png)
 
 Here we find:
 - PHP is running because the `PHPSESSID` cookie is set.
@@ -172,9 +172,9 @@ done
 - here we get a sharp drop in `Content-Length` on the response
 - from 1754 bytes to 44 bytes after 10 requests
 
-![Image](https://phantomindamachine.github.io/CTF-Blogs/images/Hammer-6.png)
+![Image](https:/phantomindamachine.github.io/CTF-Blogs/images/try-hack-me/medium/hammer/Hammer-6.png)
 
-![Image](https://phantomindamachine.github.io/CTF-Blogs/images/Hammer-7.png)
+![Image](https:/phantomindamachine.github.io/CTF-Blogs/images/try-hack-me/medium/hammer/Hammer-7.png)
 - Adding verbose to the curl command reveals the issue.
 - we are being throttled
 - other than that nothing else interesting
@@ -182,7 +182,7 @@ done
 ### Checking HTTP Responses
 
 Checking the website source code, we find a Dev Note:
-![Image](https://phantomindamachine.github.io/CTF-Blogs/images/Hammer-8.png)
+![Image](https:/phantomindamachine.github.io/CTF-Blogs/images/try-hack-me/medium/hammer/Hammer-8.png)
 - keeping this in the back of mind for now
 
 Time to enumerate the website
@@ -199,7 +199,7 @@ For this we be using `ffuf`
 ffuf -u http://hammer.thm:1337/FUZZ -w /usr/.../directory-list-2.3-medium.txt -e .php -c -ic -t 400
 ```
 
-![Image](https://phantomindamachine.github.io/CTF-Blogs/images/Hammer-9.png)
+![Image](https:/phantomindamachine.github.io/CTF-Blogs/images/try-hack-me/medium/hammer/Hammer-9.png)
 
 And now to try scanning `hmr_<DIRECTORY_NAME>` that was found in the source code
 
@@ -208,16 +208,16 @@ And now to try scanning `hmr_<DIRECTORY_NAME>` that was found in the source code
 ffuf -u http://hammer.thm:1337/hmr_FUZZ -w /usr/.../directory-list-2.3-medium.txt -e .php -c -ic -t 400
 ```
 
-![Image](https://phantomindamachine.github.io/CTF-Blogs/images/Hammer-10.png)
+![Image](https:/phantomindamachine.github.io/CTF-Blogs/images/try-hack-me/medium/hammer/Hammer-10.png)
 
 Looking through the `/hmr_logs` reveals a user 
 - `tester@hammer.thm`
 
-![Image](https://phantomindamachine.github.io/CTF-Blogs/images/Hammer-11.png)
+![Image](https:/phantomindamachine.github.io/CTF-Blogs/images/try-hack-me/medium/hammer/Hammer-11.png)
 
 Trying the user name on `/reset_password.php` to check if responses have changed
 
-![Image](https://phantomindamachine.github.io/CTF-Blogs/images/Hammer-12.png)
+![Image](https:/phantomindamachine.github.io/CTF-Blogs/images/try-hack-me/medium/hammer/Hammer-12.png)
 - we get a prompt to enter a recovery code
 - 4-Digit Code
 - timer expires after 3 mins
@@ -225,7 +225,7 @@ Trying the user name on `/reset_password.php` to check if responses have changed
 Using Burp Suite to intercept the request
 - type 4-digit code
 - **intercept** request and send to **repeater**
-![Image](https://phantomindamachine.github.io/CTF-Blogs/images/Hammer-14.png)
+![Image](https:/phantomindamachine.github.io/CTF-Blogs/images/try-hack-me/medium/hammer/Hammer-14.png)
 
    - the timeout is handled via JavaScript
    - the timeout can be modified by sending a different value for `s`
@@ -254,9 +254,9 @@ The winner this time was IP-related headers
 Trying `X-Forwarded-For: 1.1.1.1` reset the rate-limit.
 - Changing the IP-Address in the Header gives another 10 request before it kicks in again.
 - In fact, any value, even an improperly formatted IPV4 address also worked.
-![Image](https://phantomindamachine.github.io/CTF-Blogs/images/Hammer-15.png)
+![Image](https:/phantomindamachine.github.io/CTF-Blogs/images/try-hack-me/medium/hammer/Hammer-15.png)
 
-![Image](https://phantomindamachine.github.io/CTF-Blogs/images/Hammer-17.png)
+![Image](https:/phantomindamachine.github.io/CTF-Blogs/images/try-hack-me/medium/hammer/Hammer-17.png)
 
 #### Brute-Forcing the MFA
 
@@ -286,26 +286,26 @@ ffuf -u http://hammer.thm:1337/reset_password.php -w codes.txt -X "POST" -H "Con
 
 - Replace `<CHANGE_ME>` with the current `PHPSESSID`
 
-![Image](https://phantomindamachine.github.io/CTF-Blogs/images/Hammer-18.png)
+![Image](https:/phantomindamachine.github.io/CTF-Blogs/images/try-hack-me/medium/hammer/Hammer-18.png)
 
-![Image](https://phantomindamachine.github.io/CTF-Blogs/images/Hammer-20.png)
+![Image](https:/phantomindamachine.github.io/CTF-Blogs/images/try-hack-me/medium/hammer/Hammer-20.png)
 - Notice no MFA Token.
 - Guessing the payload structure would have also bypassed the 4-digit MFA code
 
 Logging in gives us our first flag.
 
-![Image](https://phantomindamachine.github.io/CTF-Blogs/images/Hammer-21.png)
+![Image](https:/phantomindamachine.github.io/CTF-Blogs/images/try-hack-me/medium/hammer/Hammer-21.png)
 
 The site is logging us out every 20 seconds.
 
-![Image](https://phantomindamachine.github.io/CTF-Blogs/images/Hammer-22.png)
+![Image](https:/phantomindamachine.github.io/CTF-Blogs/images/try-hack-me/medium/hammer/Hammer-22.png)
 - Changing the expiration date to something further in the future will prevent this
-![Image](https://phantomindamachine.github.io/CTF-Blogs/images/Hammer-24.png)
+![Image](https:/phantomindamachine.github.io/CTF-Blogs/images/try-hack-me/medium/hammer/Hammer-24.png)
 
 ### Remote Code Execution
 
 In the dashboard we see some sort of system command form field.
-![Image](https://phantomindamachine.github.io/CTF-Blogs/images/Hammer-23.png)
+![Image](https:/phantomindamachine.github.io/CTF-Blogs/images/try-hack-me/medium/hammer/Hammer-23.png)
 - most Linux commands are blocked
 - we are logged in with the `user` role
 
@@ -369,7 +369,7 @@ With that we can now run Linux commands
 
 For this we will use the website ***revshells.com*** to help craft a payload:
 
-![Image](https://phantomindamachine.github.io/CTF-Blogs/images/Hammer-30.png)
+![Image](https:/phantomindamachine.github.io/CTF-Blogs/images/try-hack-me/medium/hammer/Hammer-30.png)
 
 Lets set up our listener with `netcat`
 ```bash
@@ -389,9 +389,9 @@ So we can use the following command via the HTTP POST requests because we can no
 
 ---
 
-![Image](https://phantomindamachine.github.io/CTF-Blogs/images/Hammer-27.png)
+![Image](https:/phantomindamachine.github.io/CTF-Blogs/images/try-hack-me/medium/hammer/Hammer-27.png)
 
-![Image](https://phantomindamachine.github.io/CTF-Blogs/images/Hammer-29.png)
+![Image](https:/phantomindamachine.github.io/CTF-Blogs/images/try-hack-me/medium/hammer/Hammer-29.png)
 
 As we can see, we get the reverse shell.
 We then navigate to `/home/ubuntu/` and `cat` the file `flag.txt`.
