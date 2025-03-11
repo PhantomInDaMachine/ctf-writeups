@@ -8,10 +8,10 @@ pluralizelisttitles = false   # removes the automatically appended "s" on sideba
 # disqusShortname = "yourDisqusShortname"
 
 [params]
-    brand = "A CTF Blog"                      # name of your site - appears in the sidebar
+    brand = "CTF Writeups"                      # name of your site - appears in the sidebar
     # remote_brand_image = 'https://github.com/USERNAME.png' # path to a remote file
     # brand_image = "/images/test.jpg"    # path to the image shown in the sidebar
-    description = "Blogging about CTFs" # Used as default meta description if not specified in front matter
+    description = "Hacking to Learn while Learning to Hack" # Used as default meta description if not specified in front matter
     dark_mode = true                      # optional - defaults to false
     # favicon = "favicon.png"             # path to favicon (defaults to favicon.png)
 
