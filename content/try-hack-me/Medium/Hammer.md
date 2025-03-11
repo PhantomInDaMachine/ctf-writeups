@@ -317,16 +317,16 @@ Lets download it using `wget`:
 wget http://hammer.thm:1337/188ade1.key
 ```
 
-![Image](https://phantomindamachine.github.io/CTF-Blogs/images/Hammer%201.png)
+![Image](https://phantomindamachine.github.io/CTF-Blogs/images/try-hack-me/medium/hammer/Hammer%201.png)
 - not much info there
 
 Looking at the http request and response, we notice that we are sending a JWT token in the `Authorization` header.
 
-![Image](https://phantomindamachine.github.io/CTF-Blogs/images/Hammer-20%201.png)
+![Image](https://phantomindamachine.github.io/CTF-Blogs/images/try-hack-me/medium/hammer/Hammer-20%201.png)
 
 Lets copy that and head over to `jwt.io` to get a closer look.
 
-![Image](https://phantomindamachine.github.io/CTF-Blogs/images/Hammer-21%201.png)
+![Image](https://phantomindamachine.github.io/CTF-Blogs/images/try-hack-me/medium/hammer/Hammer-21%201.png)
 
 From the image above we can notice a few things:
 - the JWT token is signed with the `HS256` algorithm
@@ -336,7 +336,7 @@ From the image above we can notice a few things:
 
 Lets start by changing the JWT `kid` to something that does not exist.
 
-![Image](https://phantomindamachine.github.io/CTF-Blogs/images/Hammer-22%201.png)
+![Image](https://phantomindamachine.github.io/CTF-Blogs/images/try-hack-me/medium/hammer/Hammer-22%201.png)
 
 - we get a `Invalid token: Key file not found` error.
 
@@ -355,13 +355,13 @@ How can we use this information:
 
 ---
 
-![Image](https://phantomindamachine.github.io/CTF-Blogs/images/Hammer-23%201.png)
+![Image](https://phantomindamachine.github.io/CTF-Blogs/images/try-hack-me/medium/hammer/Hammer-23%201.png)
 
 - we pointed the JWT `kid` to the file `/var/www/html/188ade1.key`
 - we changed our role from `user` to `admin`
 - we used the contents of `188ade1.key` to sign our JWT token
 
-![Image](https://phantomindamachine.github.io/CTF-Blogs/images/Hammer-24%201.png)
+![Image](https://phantomindamachine.github.io/CTF-Blogs/images/try-hack-me/medium/hammer/Hammer-24%201.png)
 
 With that we can now run Linux commands
 
