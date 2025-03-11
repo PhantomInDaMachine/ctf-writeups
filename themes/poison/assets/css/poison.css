@@ -111,8 +111,10 @@ body > .wrapper {
     height: 100%;
 }
 .container.content {
+    min-width:  65%;
+
     overflow-y: auto;
-    flex-grow: 1;
+    flex-grow: 3;
 }
 .layout-reverse .container.content {
     padding-right: 0;
